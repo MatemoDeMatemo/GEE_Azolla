@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bbaf7e1-2940-4448-9c5b-5132104dc84f" name="Changes" comment="Dodano sciezki do nowych plikow na pulpicie">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-    </list>
+    <list default="true" id="7bbaf7e1-2940-4448-9c5b-5132104dc84f" name="Changes" comment="Działa! :)" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,12 +80,21 @@
       <option name="project" value="LOCAL" />
       <updated>1773229583424</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Działa! :)">
+      <option name="closed" value="true" />
+      <created>1773249680872</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1773249680872</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Rozpoczecie nowego Repo" />
     <MESSAGE value="Dodano sciezki do nowych plikow na pulpicie" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dodano sciezki do nowych plikow na pulpicie" />
+    <MESSAGE value="Działa! :)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Działa! :)" />
   </component>
 </project>
