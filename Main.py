@@ -19,7 +19,9 @@ path_desktop = Path.home() / "Desktop"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_2_months" / "Azolla_Detection_1103_2019_2709.shp"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_2_months" / "Azolla_Detection_1103_2019_benchmarkweek_otherclass.shp"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_2_months" / "Azolla_Detection_1103_2019_benchmarkweek_otherclass_6bands.shp"
-shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder" / "AV_0318_2025_09.shp"
+#shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder" / "AV_0318_2025_09.shp"
+shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder_WY" / "AV_20_03_2025_18-03_AV_Classifier_B8_B6_B7_B8A_NDVI.shp"
+
 # Load the data
 gdf = gpd.read_file(shp_path)
 
@@ -115,7 +117,7 @@ for day in unqdate_vector:
     )
 
     # Wyswietl wynik jesli > 30k
-    if gdf_azolla_pix > 100:
+    if gdf_azolla_pix > 3000:
         plt.imshow(daily_raster, cmap="hot")
         plt.title(f"Daily map for {day}")
         plt.show()
