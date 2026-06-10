@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="7bbaf7e1-2940-4448-9c5b-5132104dc84f" name="Changes" comment="Działa new">
+    <list default="true" id="7bbaf7e1-2940-4448-9c5b-5132104dc84f" name="Changes" comment="dodano cały rok">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773858339119</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="dodano cały rok">
+      <option name="closed" value="true" />
+      <created>1774627414765</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1774627414765</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -115,6 +122,7 @@
     <MESSAGE value="Dodano sciezki do nowych plikow na pulpicie" />
     <MESSAGE value="Działa! :)" />
     <MESSAGE value="Działa new" />
-    <option name="LAST_COMMIT_MESSAGE" value="Działa new" />
+    <MESSAGE value="dodano cały rok" />
+    <option name="LAST_COMMIT_MESSAGE" value="dodano cały rok" />
   </component>
 </project>
