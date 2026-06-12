@@ -22,20 +22,40 @@ path_desktop = Path.home() / "Desktop"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_2_months" / "Azolla_Detection_1103_2019_benchmarkweek_otherclass.shp"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_2_months" / "Azolla_Detection_1103_2019_benchmarkweek_otherclass_6bands.shp"
 #shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder" / "AV_0318_2025_09.shp"
-shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder_WY" / "AV_20_03_2025_18-03_AV_Classifier_B8_B6_B7_B8A_NDVI.shp"
+#shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder_WY" / "AV_20_03_2025_18-03_AV_Classifier_B8_B6_B7_B8A_NDVI.shp"
+shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder_WY" / "2026-05-08_detect-2025-01-01_to_2026-01-01_clf-AV_Classifier_2026-05-08_n6_B5_B6_B7_B8_B8A_NDVI.geojson"
 
 # Load the data
 gdf = gpd.read_file(shp_path)
 
-# Sort by time and polygon size
-gdf_sorted = gdf.sort_values(by=["system:tim", "count"], ascending= [True, False])
-print("gdf_sorted: ", gdf_sorted)
+gdf = gpd.read_file(shp_path)
 
-# Change time type
+print(gdf.columns)
+print(gdf.head())
+print(gdf.dtypes)
+
+print(gdf.columns.tolist())
+
+# Sort by time and polygon size
+# gdf_sorted = gdf.sort_values(by=["system:tim", "count"], ascending= [True, False])
+# print("gdf_sorted: ", gdf_sorted)
+#
+# # Change time type
+# gdf_sorted["date"] = pd.to_datetime(
+#     gdf_sorted["system:tim"],
+#     unit="ms"
+#     ).dt.floor("s")
+
+# json
+gdf_sorted = gdf.sort_values(
+    by=["system:time_start", "count"],
+    ascending=[True, False]
+)
+
 gdf_sorted["date"] = pd.to_datetime(
-    gdf_sorted["system:tim"],
+    gdf_sorted["system:time_start"],
     unit="ms"
-    ).dt.floor("s")
+).dt.floor("s")
 
 
 #### Visualisation ####
@@ -84,7 +104,7 @@ plt.show()
 
 
 # Plot A. pixels - max value per N days
-N_DAYS = 20  # <- tutaj zmieniasz okres
+N_DAYS = 15  # <- tutaj zmieniasz okres
 
 gdf_sorted_inx = gdf_sorted.set_index("date")
 rolling_max = gdf_sorted_inx["count"].resample(f"{N_DAYS}D").max()
@@ -96,6 +116,57 @@ plt.title(f"Max detections every {N_DAYS} days")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.show()
+
+
+### Wykresimport matplotlib.dates as mdates
+import matplotlib.dates as mdates
+
+N_DAYS = 15
+
+gdf_sorted_inx = gdf_sorted.set_index("date")
+rolling_max = gdf_sorted_inx["count"].resample(f"{N_DAYS}D").max()
+
+fig, ax = plt.subplots(figsize=(10, 5))
+
+rolling_max.plot(
+    ax=ax,
+    marker="o",
+    linewidth=1.5,
+    markersize=4
+)
+
+# ---- TUTAJ DODAJ ----
+
+ticks = pd.date_range(
+    start="2025-01-01",
+    end="2025-12-31",
+    freq="MS"
+)
+
+
+ax.set_xticks(ticks)
+ax.xaxis.set_major_formatter(mdates.DateFormatter("%b\n%Y"))
+
+ax.set_xlim(
+    pd.Timestamp("2025-01-01"),
+    pd.Timestamp("2025-12-31")
+)
+
+# ---------------------
+
+ax.set_title(
+    f"Maximum detections every {N_DAYS} days",
+    fontweight="bold",
+    fontsize=14
+)
+
+ax.set_xlabel("Date")
+ax.set_ylabel("Maximum count")
+
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
 
 #
 # ### Heat map ####
