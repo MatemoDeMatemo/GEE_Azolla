@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import geopandas as gpd
 from pathlib import Path
 import pandas as pd
+import matplotlib.dates as mdates
 
 from collections import defaultdict # sklejanie
 
@@ -28,14 +29,6 @@ shp_path = path_desktop / "GEE_Azolla_Materials" / "GEE_Folder_WY" / "2026-05-08
 # Load the data
 gdf = gpd.read_file(shp_path)
 
-gdf = gpd.read_file(shp_path)
-
-print(gdf.columns)
-print(gdf.head())
-print(gdf.dtypes)
-
-print(gdf.columns.tolist())
-
 # Sort by time and polygon size
 # gdf_sorted = gdf.sort_values(by=["system:tim", "count"], ascending= [True, False])
 # print("gdf_sorted: ", gdf_sorted)
@@ -47,80 +40,22 @@ print(gdf.columns.tolist())
 #     ).dt.floor("s")
 
 # json
+# Posortuj cale dane, najpierw po czasie, potem liczbie pixeli na poligon (od najwiekszego)
 gdf_sorted = gdf.sort_values(
     by=["system:time_start", "count"],
     ascending=[True, False]
 )
+print(gdf_sorted)
 
+# Zamiana czasu z ciagu cyfr na daty
 gdf_sorted["date"] = pd.to_datetime(
     gdf_sorted["system:time_start"],
     unit="ms"
 ).dt.floor("s")
 
 
-#### Visualisation ####
-# Plot one polygon
-first_row = gdf_sorted.iloc[[0]]
-
-first_row.plot()
-plt.show()
-
-# Plot 20 polygons
-gdf_sorted.iloc[:20].plot()
-plt.show()
-
-# Plot A. pixels for each date
-daily_sum = gdf_sorted.groupby("date")["count"].sum()
-
-pd.set_option('display.max_rows', None)
-print(daily_sum)
-
-daily_sum.plot()
-plt.show()
-
-# Plot A. pixels for each month
-gdf_sorted_inx = gdf_sorted.set_index("date")
-monthly_sum = gdf_sorted_inx["count"].resample("ME").sum()
-monthly_sum.plot()
-
-plt.xlabel("Month")
-plt.ylabel("Sum of count")
-plt.title("Monthly sum of detections")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
-# Plot A. max pixels for each month
-gdf_sorted_inx = gdf_sorted.set_index("date")
-monthly_max = gdf_sorted_inx["count"].resample("ME").max()
-monthly_max.plot()
-
-plt.xlabel("Month")
-plt.ylabel("Max count")
-plt.title("Monthly max of detections")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
-
-# Plot A. pixels - max value per N days
-N_DAYS = 15  # <- tutaj zmieniasz okres
-
-gdf_sorted_inx = gdf_sorted.set_index("date")
-rolling_max = gdf_sorted_inx["count"].resample(f"{N_DAYS}D").max()
-rolling_max.plot(marker="o", linewidth=1, markersize=4)
-
-plt.xlabel("Date")
-plt.ylabel("Max count")
-plt.title(f"Max detections every {N_DAYS} days")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.show()
-
 
 ### Wykresimport matplotlib.dates as mdates
-import matplotlib.dates as mdates
-
 N_DAYS = 15
 
 gdf_sorted_inx = gdf_sorted.set_index("date")
